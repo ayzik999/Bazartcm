@@ -2,37 +2,117 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>₿AZAR TCM — мини-авито</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>₿AZAR TCM</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { color: #333; }
-    .ad { border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin: 10px 0; }
-    .ad h2 { margin: 0; color: #0066cc; }
-    .ad p { margin: 5px 0; }
-    a.button {
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #222;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+    header img {
+      height: 50px;
+    }
+    header h1 {
+      font-size: 28px;
+      margin: 0;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: 0.3s;
+      text-align: center;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      margin: 0;
+      font-size: 20px;
+      color: #333;
+    }
+    .card-content p {
+      margin: 8px 0;
+      color: #666;
+    }
+    .btn {
       display: inline-block;
+      margin-top: 10px;
       padding: 10px 15px;
-      background: #0066cc;
-      color: #fff;
-      border-radius: 5px;
+      background: #4CAF50;
+      color: white;
+      border-radius: 6px;
       text-decoration: none;
+    }
+    .btn:hover {
+      background: #388E3C;
     }
   </style>
 </head>
 <body>
-  <h1>₿AZAR TCM</h1>
-  <p>Добро пожаловать! Здесь вы можете размещать свои объявления 🛒</p>
 
-  <div class="ad">
-    <h2>Цемент навалом</h2>
-    <p>Цена: 4500 сом/тонна</p>
-    <a class="button" href="https://t.me/BazarTcmBot">Связаться в Telegram</a>
-  </div>
+  <header>
+    <!-- ЛОГОТИП -->
+    <img src="logo.png" alt="Логотип">
+    <h1>₿AZAR TCM</h1>
+  </header>
 
-  <div class="ad">
-    <h2>Стройматериалы</h2>
-    <p>Цена: договорная</p>
-    <a class="button" href="https://t.me/BazarTcmBot">Связаться в Telegram</a>
+  <div class="container">
+    <!-- Категория: Стройматериалы -->
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250?text=Стройматериалы" alt="Стройматериалы">
+      <div class="card-content">
+        <h3>Стройматериалы</h3>
+        <p>Кирпич, цемент, гипс и др.</p>
+        <a class="btn" href="https://t.me/ayzik999">Связаться</a>
+      </div>
+    </div>
+
+    <!-- Категория: Бытовая химия -->
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250?text=Бытовая+химия" alt="Бытовая химия">
+      <div class="card-content">
+        <h3>Бытовая химия</h3>
+        <p>Мыло, порошки, моющие средства.</p>
+        <a class="btn" href="https://t.me/ayzik999">Связаться</a>
+      </div>
+    </div>
+
+    <!-- Категория: Техника -->
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250?text=Техника" alt="Техника">
+      <div class="card-content">
+        <h3>Техника</h3>
+        <p>Электроника и бытовая техника.</p>
+        <a class="btn" href="https://t.me/ayzik999">Связаться</a>
+      </div>
+    </div>
   </div>
 
 </body>
