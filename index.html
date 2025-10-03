@@ -81,12 +81,13 @@
       font-weight: 600;
       border-radius: 10px;
       transition: 0.3s;
+      cursor: pointer;
+      border: none;
     }
     .btn:hover {
       background: #e6c200;
     }
 
-    /* Адаптив */
     @media(max-width: 600px){
       header h1 { font-size: 24px; }
       header p { font-size: 14px; }
@@ -103,26 +104,9 @@
   <div class="grid" id="products"></div>
 
   <script>
-    async function loadProducts() {
-      const res = await fetch("products.json");
-      const products = await res.json();
-      const container = document.getElementById("products");
+    const TELEGRAM_TOKEN = "8150134999:AAHcRSAXrBFsfVojtwdO57RHnmz1aEyOM4w";
+    const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID"; // замените на свой Telegram ID
 
-      products.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.title}">
-          <div class="card-body">
-            <div class="card-title">${p.title}</div>
-            <div class="card-desc">${p.desc}</div>
-            <a href="${p.link}" target="_blank" class="btn">Связаться</a>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-    loadProducts();
-  </script>
-</body>
-</html>
+    async function sendToTelegram(product) {
+      const text = `Новое объявление:\n\n` +
+                   `Категор
