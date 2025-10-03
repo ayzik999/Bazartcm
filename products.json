@@ -1,20 +1,35 @@
-[
-  {
-    "title": "Стройматериалы",
-    "desc": "Блоки, кирпич, цемент, доставка.",
-    "img": "https://via.placeholder.com/400x250?text=Стройматериалы",
-    "link": "https://t.me/ayzik999"
+const texts = {
+  ru: {
+    categoriesTitle: "Категории",
+    categories: ["Авто", "Недвижимость", "Работа", "Одежда", "Электроника", "Услуги"],
+    telegram: "Перейти в Telegram"
   },
-  {
-    "title": "Мыло хозяйственное",
-    "desc": "Натуральное, 72%, оптом и в розницу.",
-    "img": "https://via.placeholder.com/400x250?text=Мыло",
-    "link": "https://t.me/ayzik999"
+  kg: {
+    categoriesTitle: "Категориялар",
+    categories: ["Унаа", "Кыймылсыз мүлк", "Жумуш", "Кийим", "Электроника", "Кызматтар"],
+    telegram: "Telegram'га өтүү"
   },
-  {
-    "title": "Сантехника",
-    "desc": "Трубы, краны, фитинги, опт/розница.",
-    "img": "https://via.placeholder.com/400x250?text=Сантехника",
-    "link": "https://t.me/ayzik999"
+  uz: {
+    categoriesTitle: "Kategoriyalar",
+    categories: ["Avto", "Ko‘chmas mulk", "Ish", "Kiyim", "Elektronika", "Xizmatlar"],
+    telegram: "Telegram'ga o‘tish"
   }
-]
+};
+
+function setLang(lang) {
+  document.getElementById("categories-title").textContent = texts[lang].categoriesTitle;
+
+  const grid = document.getElementById("categories");
+  grid.innerHTML = "";
+  texts[lang].categories.forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.textContent = cat;
+    grid.appendChild(div);
+  });
+
+  document.getElementById("telegram-btn").textContent = texts[lang].telegram;
+}
+
+// по умолчанию русский
+setLang('ru');
