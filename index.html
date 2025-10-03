@@ -1,60 +1,31 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: #f9f9f9;
-  color: #333;
-}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>₿AZAR TCM — рынок без границ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">₿AZAR TCM</div>
+    <div class="lang-switch">
+      <button onclick="setLang('ru')">🇷🇺 Рус</button>
+      <button onclick="setLang('kg')">🇰🇬 Кыргызча</button>
+      <button onclick="setLang('uz')">🇺🇿 O‘zbekcha</button>
+    </div>
+    <input type="text" id="search" placeholder="🔍 Поиск...">
+  </header>
 
-header {
-  text-align: center;
-  padding: 20px;
-  background: #222;
-  color: white;
-}
+  <main>
+    <h2 id="categories-title">Категории</h2>
+    <div class="grid" id="categories"></div>
+  </main>
 
-header h1 {
-  margin: 0;
-  font-size: 2em;
-}
+  <footer>
+    <a href="https://t.me/BazarTcmBot" class="btn" id="telegram-btn">Перейти в Telegram</a>
+  </footer>
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 10px;
-  padding: 30px;
-  text-align: center;
-  font-size: 1.2em;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.card:hover {
-  background: #f0f0f0;
-  transform: scale(1.05);
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 12px 24px;
-  background: #ff6600;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 1.1em;
-}
-
-.btn:hover {
-  background: #e65500;
-}
+  <script src="lang.js"></script>
+</body>
+</html>
