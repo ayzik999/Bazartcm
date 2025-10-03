@@ -1,20 +1,96 @@
-[
-  {
-    "title": "Стройматериалы",
-    "desc": "Блоки, кирпич, цемент, доставка.",
-    "img": "https://via.placeholder.com/400x250?text=Стройматериалы",
-    "link": "https://t.me/ayzik999"
-  },
-  {
-    "title": "Мыло хозяйственное",
-    "desc": "Натуральное, 72%, оптом и в розницу.",
-    "img": "https://via.placeholder.com/400x250?text=Мыло",
-    "link": "https://t.me/ayzik999"
-  },
-  {
-    "title": "Сантехника",
-    "desc": "Трубы, краны, фитинги, опт/розница.",
-    "img": "https://via.placeholder.com/400x250?text=Сантехника",
-    "link": "https://t.me/ayzik999"
-  }
-]
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>₿AZAR TCM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #222;
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.02);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 15px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #28a745;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background: #218838;
+    }
+  </style>
+</head>
+<body>
+  <header>₿AZAR TCM — твой рынок без границ</header>
+  <div class="grid" id="products"></div>
+
+  <script>
+    async function loadProducts() {
+      const res = await fetch("products.json");
+      const products = await res.json();
+      const container = document.getElementById("products");
+
+      products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}">
+          <div class="card-body">
+            <div class="card-title">${p.title}</div>
+            <div class="card-desc">${p.desc}</div>
+            <a href="${p.link}" target="_blank" class="btn">Связаться</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+    loadProducts();
+  </script>
+</body>
+</html>
