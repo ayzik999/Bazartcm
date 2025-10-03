@@ -1,88 +1,60 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>₿AZAR — рынок без границ</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-    header {
-      background: #111;
-      color: #fff;
-      padding: 20px;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px;
-    }
-    .card {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      margin: 15px;
-      padding: 15px;
-      width: 280px;
-    }
-    .card img {
-      width: 100%;
-      border-radius: 12px;
-    }
-    .card h3 {
-      margin: 15px 0 10px;
-    }
-    .card p {
-      color: #666;
-      font-size: 14px;
-    }
-    .btn {
-      display: inline-block;
-      background: #0088cc;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-    .btn:hover {
-      background: #005f88;
-    }
-  </style>
-</head>
-<body>
-  <header>₿AZAR — рынок без границ</header>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9f9f9;
+  color: #333;
+}
 
-  <div class="container">
-    <div class="card">
-      <img src="https://via.placeholder.com/400x250?text=Стройматериалы" alt="Стройматериалы">
-      <h3>Стройматериалы</h3>
-      <p>Блоки, кирпич, цемент, доставка.</p>
-      <a href="https://t.me/BazarTcmBot" class="btn">Разместить рекламу</a>
-    </div>
+header {
+  text-align: center;
+  padding: 20px;
+  background: #222;
+  color: white;
+}
 
-    <div class="card">
-      <img src="https://via.placeholder.com/400x250?text=Мыло" alt="Мыло хозяйственное">
-      <h3>Мыло хозяйственное</h3>
-      <p>Натуральное, 72%, оптом и в розницу.</p>
-      <a href="https://t.me/BazarTcmBot" class="btn">Разместить рекламу</a>
-    </div>
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
 
-    <div class="card">
-      <img src="https://via.placeholder.com/400x250?text=Сантехника" alt="Сантехника">
-      <h3>Сантехника</h3>
-      <p>Трубы, краны, фитинги, опт/розница.</p>
-      <a href="https://t.me/BazarTcmBot" class="btn">Разместить рекламу</a>
-    </div>
-  </div>
-</body>
-</html>
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  font-size: 1.2em;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.card:hover {
+  background: #f0f0f0;
+  transform: scale(1.05);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #ff6600;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+}
+
+.btn:hover {
+  background: #e65500;
+}
