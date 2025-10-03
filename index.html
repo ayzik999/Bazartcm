@@ -1,31 +1,80 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>₿AZAR TCM — рынок без границ</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <div class="logo">₿AZAR TCM</div>
-    <div class="lang-switch">
-      <button onclick="setLang('ru')">🇷🇺 Рус</button>
-      <button onclick="setLang('kg')">🇰🇬 Кыргызча</button>
-      <button onclick="setLang('uz')">🇺🇿 O‘zbekcha</button>
-    </div>
-    <input type="text" id="search" placeholder="🔍 Поиск...">
-  </header>
+const texts = {
+  ru: {
+    categoriesTitle: "Категории",
+    categories: [
+      "Авто",
+      "Недвижимость",
+      "Работа",
+      "Одежда, обувь, аксессуары",
+      "Хобби и отдых",
+      "Животные",
+      "Готовый бизнес и оборудование",
+      "Услуги",
+      "Электроника",
+      "Для дома и дачи",
+      "Запчасти",
+      "Товары для детей",
+      "Жильё для путешествия",
+      "Красота и здоровье"
+    ],
+    telegram: "Перейти в Telegram"
+  },
+  kg: {
+    categoriesTitle: "Категориялар",
+    categories: [
+      "Унаа",
+      "Кыймылсыз мүлк",
+      "Жумуш",
+      "Кийим-кече, бут кийим, аксессуарлар",
+      "Хобби жана эс алуу",
+      "Жаныбарлар",
+      "Даяр бизнес жана жабдуулар",
+      "Кызматтар",
+      "Электроника",
+      "Үй жана дача үчүн",
+      "Запастык тетиктер",
+      "Балдар үчүн товарлар",
+      "Саякат үчүн турак жай",
+      "Сулуулук жана ден соолук"
+    ],
+    telegram: "Telegram'га өтүү"
+  },
+  uz: {
+    categoriesTitle: "Kategoriyalar",
+    categories: [
+      "Avto",
+      "Ko‘chmas mulk",
+      "Ish",
+      "Kiyim, oyoq-kiyim, aksessuarlar",
+      "Hobbi va dam olish",
+      "Hayvonlar",
+      "Tayyor biznes va uskunalar",
+      "Xizmatlar",
+      "Elektronika",
+      "Uy va dala uchun",
+      "Ehtiyot qismlar",
+      "Bolalar uchun mahsulotlar",
+      "Sayohat uchun uy-joy",
+      "Go‘zallik va sog‘liq"
+    ],
+    telegram: "Telegram'ga o‘tish"
+  }
+};
 
-  <main>
-    <h2 id="categories-title">Категории</h2>
-    <div class="grid" id="categories"></div>
-  </main>
+function setLang(lang) {
+  document.getElementById("categories-title").textContent = texts[lang].categoriesTitle;
 
-  <footer>
-    <a href="https://t.me/BazarTcmBot" class="btn" id="telegram-btn">Перейти в Telegram</a>
-  </footer>
+  const grid = document.getElementById("categories");
+  grid.innerHTML = "";
+  texts[lang].categories.forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.textContent = cat;
+    grid.appendChild(div);
+  });
 
-  <script src="lang.js"></script>
-</body>
-</html>
+  document.getElementById("telegram-btn").textContent = texts[lang].telegram;
+}
+
+// по умолчанию русский
+setLang('ru');
