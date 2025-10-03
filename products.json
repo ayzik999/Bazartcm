@@ -1,17 +1,62 @@
 const texts = {
   ru: {
     categoriesTitle: "Категории",
-    categories: ["Авто", "Недвижимость", "Работа", "Одежда", "Электроника", "Услуги"],
+    categories: [
+      "Авто",
+      "Недвижимость",
+      "Работа",
+      "Одежда, обувь, аксессуары",
+      "Хобби и отдых",
+      "Животные",
+      "Готовый бизнес и оборудование",
+      "Услуги",
+      "Электроника",
+      "Для дома и дачи",
+      "Запчасти",
+      "Товары для детей",
+      "Жильё для путешествия",
+      "Красота и здоровье"
+    ],
     telegram: "Перейти в Telegram"
   },
   kg: {
     categoriesTitle: "Категориялар",
-    categories: ["Унаа", "Кыймылсыз мүлк", "Жумуш", "Кийим", "Электроника", "Кызматтар"],
+    categories: [
+      "Унаа",
+      "Кыймылсыз мүлк",
+      "Жумуш",
+      "Кийим-кече, бут кийим, аксессуарлар",
+      "Хобби жана эс алуу",
+      "Жаныбарлар",
+      "Даяр бизнес жана жабдуулар",
+      "Кызматтар",
+      "Электроника",
+      "Үй жана дача үчүн",
+      "Запастык тетиктер",
+      "Балдар үчүн товарлар",
+      "Саякат үчүн турак жай",
+      "Сулуулук жана ден соолук"
+    ],
     telegram: "Telegram'га өтүү"
   },
   uz: {
     categoriesTitle: "Kategoriyalar",
-    categories: ["Avto", "Ko‘chmas mulk", "Ish", "Kiyim", "Elektronika", "Xizmatlar"],
+    categories: [
+      "Avto",
+      "Ko‘chmas mulk",
+      "Ish",
+      "Kiyim, oyoq-kiyim, aksessuarlar",
+      "Hobbi va dam olish",
+      "Hayvonlar",
+      "Tayyor biznes va uskunalar",
+      "Xizmatlar",
+      "Elektronika",
+      "Uy va dala uchun",
+      "Ehtiyot qismlar",
+      "Bolalar uchun mahsulotlar",
+      "Sayohat uchun uy-joy",
+      "Go‘zallik va sog‘liq"
+    ],
     telegram: "Telegram'ga o‘tish"
   }
 };
