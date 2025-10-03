@@ -2,143 +2,87 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>₿AZAR TCM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>₿AZAR — рынок без границ</title>
   <style>
     body {
-      font-family: 'Inter', Arial, sans-serif;
-      background: #f9fafb;
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
       margin: 0;
       padding: 0;
+      text-align: center;
     }
     header {
-      text-align: center;
-      padding: 30px 20px;
-      background: linear-gradient(90deg, #0a2f1c, #153f25);
-      color: #ffd700;
+      background: #111;
+      color: #fff;
+      padding: 20px;
+      font-size: 22px;
+      font-weight: bold;
     }
-    header img {
-      max-height: 80px;
-      display: block;
-      margin: 0 auto 15px;
-    }
-    header h1 { margin: 0; font-size: 28px; font-weight: 700; }
-    header p { margin: 5px 0 0; font-size: 16px; color: #f0e68c; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 30px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px;
     }
     .card {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin: 15px;
+      padding: 15px;
+      width: 280px;
     }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.12); }
-    .card img { width: 100%; height: 180px; object-fit: cover; }
-    .card-body { padding: 15px 20px; flex: 1 0 auto; display: flex; flex-direction: column; }
-    .card-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #111; }
-    .card-desc { font-size: 14px; color: #555; margin-bottom: 12px; min-height: 40px; }
-
-    .token-row {
-      margin-top: auto;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
+    .card img {
+      width: 100%;
+      border-radius: 12px;
     }
-    .token-box {
-      background: #f3f4f6;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 13px;
-      color: #111;
-      overflow-wrap: anywhere;
-      flex: 1 1 auto;
-      min-width: 0;
+    .card h3 {
+      margin: 15px 0 10px;
+    }
+    .card p {
+      color: #666;
+      font-size: 14px;
     }
     .btn {
       display: inline-block;
-      padding: 10px 14px;
-      background: #ffd700;
-      color: #0a2f1c;
+      background: #0088cc;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
-      border-radius: 10px;
-      transition: 0.2s;
-      cursor: pointer;
-      border: none;
+      margin-top: 10px;
+      font-weight: bold;
     }
-    .btn:hover { background: #e6c200; }
-
-    @media(max-width: 600px){
-      header h1 { font-size: 24px; }
-      header p { font-size: 14px; }
+    .btn:hover {
+      background: #005f88;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.jpg" alt="₿AZAR TCM">
-    <h1>₿AZAR TCM</h1>
-    <p>Рынок без границ — размести своё объявление за 200 сом</p>
-  </header>
+  <header>₿AZAR — рынок без границ</header>
 
-  <div class="grid" id="products"></div>
+  <div class="container">
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250?text=Стройматериалы" alt="Стройматериалы">
+      <h3>Стройматериалы</h3>
+      <p>Блоки, кирпич, цемент, доставка.</p>
+      <a href="https://t.me/BazarTcmBot" class="btn">Разместить рекламу</a>
+    </div>
 
-  <script>
-    // Токен, который ты просил показать (уже указан в чате)
-    // ВНИМАНИЕ: токен видим пользователю — это небезопасно для продакшена.
-    const PUBLIC_BOT_TOKEN = "8150134999:AAHcRSAXrBFsfVojtwdO57RHnmz1aEyOM4w";
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250?text=Мыло" alt="Мыло хозяйственное">
+      <h3>Мыло хозяйственное</h3>
+      <p>Натуральное, 72%, оптом и в розницу.</p>
+      <a href="https://t.me/BazarTcmBot" class="btn">Разместить рекламу</a>
+    </div>
 
-    // Функция копирования в буфер обмена
-    function copyToClipboard(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-          alert("Токен скопирован в буфер обмена");
-        }, () => {
-          fallbackCopy(text);
-        });
-      } else {
-        fallbackCopy(text);
-      }
-    }
-    function fallbackCopy(text) {
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      try {
-        document.execCommand('copy');
-        alert("Токен скопирован в буфер обмена");
-      } catch (e) {
-        alert("Не удалось скопировать токен. Скопируй вручную.");
-      }
-      document.body.removeChild(ta);
-    }
-
-    async function loadProducts() {
-      try {
-        const res = await fetch("products.json");
-        const products = await res.json();
-        const container = document.getElementById("products");
-        container.innerHTML = "";
-
-        products.forEach(p => {
-          const card = document.createElement("div");
-          card.className = "card";
-          card.innerHTML = `
-            <img src="${p.img}" alt="${p.title}">
-            <div class="card-body">
-              <div class="card-title">${p.ti
+    <div class="card">
+      <img src="https://via.placeholder.com/400x250?text=Сантехника" alt="Сантехника">
+      <h3>Сантехника</h3>
+      <p>Трубы, краны, фитинги, опт/розница.</p>
+      <a href="https://t.me/BazarTcmBot" class="btn">Разместить рекламу</a>
+    </div>
+  </div>
+</body>
+</html>
