@@ -3,111 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>₿AZAR TCM — рынок без границ</title>
+  <title>Авто — ₿AZAR TCM</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #b1e2b1;
-      color: #333;
-    }
-    header {
-      background: #222;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .categories {
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #2c3e50; color: #fff; padding: 15px; text-align: center; font-size: 22px; }
+    h2 { margin: 20px; color: #333; }
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 15px;
       padding: 20px;
     }
-    .category {
-      background: white;
+    .item {
+      background: #fff;
+      padding: 20px;
       border-radius: 8px;
+      text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-      padding: 20px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .category button {
-      margin-top: 10px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 6px;
-      background: #28a745;
-      color: white;
-      font-size: 14px;
+      font-weight: bold;
       cursor: pointer;
     }
-    .category button:hover {
-      background: #218838;
-    }
-    footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-      font-size: 14px;
-    }
-    footer a {
-      color: #00aced;
-      text-decoration: none;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
+    .item:hover { background: #d7f7d7; }
   </style>
 </head>
 <body>
+  <header>Авто — ₿AZAR TCM</header>
 
-<header>₿AZAR TCM — рынок без границ</header>
+  <h2>Подкатегории</h2>
+  <section class="grid">
+    <div class="item">Легковые авто</div>
+    <div class="item">Новые авто</div>
+    <div class="item">Аренда авто</div>
+    <div class="item">Запчасти и аксессуары</div>
+    <div class="item">Грузовики</div>
+    <div class="item">Мотоциклы</div>
+    <div class="item">Водный транспорт</div>
+  </section>
 
-<!-- ТОЛЬКО карточки категорий -->
-<section class="categories" id="categories"></section>
-
-<footer>
-  <p>₿AZAR TCM — рынок без границ © 2025</p>
-  <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
-  <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
-</footer>
-
-<script>
-  // Список категорий
-  const categories = [
-    "Авто",
-    "Недвижимость",
-    "Работа",
-    "Одежда и обувь",
-    "Хобби и отдых",
-    "Животные",
-    "Бизнес и оборудование",
-    "Услуги",
-    "Электроника",
-    "Для дома",
-    "Запчасти",
-    "Детские товары",
-    "Путешествия",
-    "Красота и здоровье"
-  ];
-
-  // Рисуем карточки с кнопкой
-  const catSection = document.getElementById("categories");
-  categories.forEach(cat => {
-    const div = document.createElement("div");
-    div.className = "category";
-    div.innerHTML = `
-      <h3>${cat}</h3>
-      <button onclick="window.open('https://t.me/BazarTcmBot', '_blank')">Добавить объявление</button>
-    `;
-    catSection.appendChild(div);
-  });
-</script>
-
+  <h2>Популярные марки</h2>
+  <section class="grid">
+    <div class="item">Audi</div>
+    <div class="item">BMW</div>
+    <div class="item">Hyundai</div>
+    <div class="item">Kia</div>
+    <div class="item">Mercedes-Benz</div>
+    <div class="item">Toyota</div>
+    <div class="item">Volkswagen</div>
+    <div class="item">LADA (ВАЗ)</div>
+  </section>
 </body>
 </html>
