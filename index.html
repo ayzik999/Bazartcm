@@ -30,13 +30,22 @@
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       text-align: center;
-      padding: 20px;
-      cursor: pointer;
+      padding: 15px;
       transition: 0.3s;
     }
+    .category img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .category h3 {
+      margin: 10px 0;
+      font-size: 16px;
+    }
     .category button {
-      margin-top: 10px;
-      padding: 8px 15px;
+      margin-top: 8px;
+      padding: 6px 12px;
       border: none;
       border-radius: 6px;
       background: #28a745;
@@ -68,7 +77,6 @@
 
 <header>₿AZAR TCM — рынок без границ</header>
 
-<!-- ТОЛЬКО карточки категорий -->
 <section class="categories" id="categories"></section>
 
 <footer>
@@ -78,31 +86,30 @@
 </footer>
 
 <script>
-  // Список категорий
   const categories = [
-    "Авто",
-    "Недвижимость",
-    "Работа",
-    "Одежда и обувь",
-    "Хобби и отдых",
-    "Животные",
-    "Бизнес и оборудование",
-    "Услуги",
-    "Электроника",
-    "Для дома",
-    "Запчасти",
-    "Детские товары",
-    "Путешествия",
-    "Красота и здоровье"
+    {name: "Авто", img: "https://via.placeholder.com/200x120?text=Авто"},
+    {name: "Недвижимость", img: "https://via.placeholder.com/200x120?text=Дом"},
+    {name: "Работа", img: "https://via.placeholder.com/200x120?text=Работа"},
+    {name: "Одежда и обувь", img: "https://via.placeholder.com/200x120?text=Одежда"},
+    {name: "Хобби и отдых", img: "https://via.placeholder.com/200x120?text=Хобби"},
+    {name: "Животные", img: "https://via.placeholder.com/200x120?text=Животные"},
+    {name: "Бизнес и оборудование", img: "https://via.placeholder.com/200x120?text=Бизнес"},
+    {name: "Услуги", img: "https://via.placeholder.com/200x120?text=Услуги"},
+    {name: "Электроника", img: "https://via.placeholder.com/200x120?text=Электроника"},
+    {name: "Для дома", img: "https://via.placeholder.com/200x120?text=Дом"},
+    {name: "Запчасти", img: "https://via.placeholder.com/200x120?text=Запчасти"},
+    {name: "Детские товары", img: "https://via.placeholder.com/200x120?text=Дети"},
+    {name: "Путешествия", img: "https://via.placeholder.com/200x120?text=Путешествия"},
+    {name: "Красота и здоровье", img: "https://via.placeholder.com/200x120?text=Красота"}
   ];
 
-  // Рисуем карточки с кнопкой
   const catSection = document.getElementById("categories");
   categories.forEach(cat => {
     const div = document.createElement("div");
     div.className = "category";
     div.innerHTML = `
-      <h3>${cat}</h3>
+      <img src="${cat.img}" alt="${cat.name}">
+      <h3>${cat.name}</h3>
       <button onclick="window.open('https://t.me/BazarTcmBot', '_blank')">Добавить объявление</button>
     `;
     catSection.appendChild(div);
