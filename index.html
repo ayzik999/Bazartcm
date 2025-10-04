@@ -74,7 +74,22 @@
 
 <header>₿AZAR TCM — рынок без границ</header>
 
-<nav id="menu"></nav>
+<nav id="menu">
+  <a href="#">Авто</a>
+  <a href="#">Недвижимость</a>
+  <a href="#">Работа</a>
+  <a href="#">Одежда и обувь</a>
+  <a href="#">Хобби и отдых</a>
+  <a href="#">Животные</a>
+  <a href="#">Бизнес и оборудование</a>
+  <a href="#">Услуги</a>
+  <a href="#">Электроника</a>
+  <a href="#">Для дома</a>
+  <a href="#">Запчасти</a>
+  <a href="#">Детские товары</a>
+  <a href="#">Путешествия</a>
+  <a href="#">Красота и здоровье</a>
+</nav>
 
 <section class="categories" id="categories"></section>
 
@@ -85,7 +100,7 @@
 </footer>
 
 <script>
-  // Один список категорий
+  // Список категорий
   const categories = [
     "Авто",
     "Недвижимость",
@@ -103,16 +118,7 @@
     "Красота и здоровье"
   ];
 
-  // Рисуем меню
-  const menu = document.getElementById("menu");
-  categories.forEach(cat => {
-    const link = document.createElement("a");
-    link.href = "#";
-    link.textContent = cat;
-    menu.appendChild(link);
-  });
-
-  // Рисуем карточки
+  // Рисуем только карточки
   const catSection = document.getElementById("categories");
   categories.forEach(cat => {
     const div = document.createElement("div");
