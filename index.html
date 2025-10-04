@@ -1,120 +1,58 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>₿AZAR TCM — рынок без границ</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #b1e2b1;
-      color: #333;
-    }
-    header {
-      background: #222;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 20px;
-    }
-    .category {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      text-align: center;
-      padding: 15px;
-      transition: 0.3s;
-    }
-    .category img {
-      width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-    .category h3 {
-      margin: 10px 0;
-      font-size: 16px;
-    }
-    .category button {
-      margin-top: 8px;
-      padding: 6px 12px;
-      border: none;
-      border-radius: 6px;
-      background: #28a745;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .category button:hover {
-      background: #218838;
-    }
-    footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-      font-size: 14px;
-    }
-    footer a {
-      color: #00aced;
-      text-decoration: none;
-    }
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-
-<header>₿AZAR TCM — рынок без границ</header>
-
-<section class="categories" id="categories"></section>
-
-<footer>
-  <p>₿AZAR TCM — рынок без границ © 2025</p>
-  <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
-  <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
-</footer>
-
-<script>
-  const categories = [
-    {name: "Авто", img: "https://via.placeholder.com/200x120?text=Авто"},
-    {name: "Недвижимость", img: "https://via.placeholder.com/200x120?text=Дом"},
-    {name: "Работа", img: "https://via.placeholder.com/200x120?text=Работа"},
-    {name: "Одежда и обувь", img: "https://via.placeholder.com/200x120?text=Одежда"},
-    {name: "Хобби и отдых", img: "https://via.placeholder.com/200x120?text=Хобби"},
-    {name: "Животные", img: "https://via.placeholder.com/200x120?text=Животные"},
-    {name: "Бизнес и оборудование", img: "https://via.placeholder.com/200x120?text=Бизнес"},
-    {name: "Услуги", img: "https://via.placeholder.com/200x120?text=Услуги"},
-    {name: "Электроника", img: "https://via.placeholder.com/200x120?text=Электроника"},
-    {name: "Для дома", img: "https://via.placeholder.com/200x120?text=Дом"},
-    {name: "Запчасти", img: "https://via.placeholder.com/200x120?text=Запчасти"},
-    {name: "Детские товары", img: "https://via.placeholder.com/200x120?text=Дети"},
-    {name: "Путешествия", img: "https://via.placeholder.com/200x120?text=Путешествия"},
-    {name: "Красота и здоровье", img: "https://via.placeholder.com/200x120?text=Красота"}
-  ];
-
-  const catSection = document.getElementById("categories");
-  categories.forEach(cat => {
-    const div = document.createElement("div");
-    div.className = "category";
-    div.innerHTML = `
-      <img src="${cat.img}" alt="${cat.name}">
-      <h3>${cat.name}</h3>
-      <button onclick="window.open('https://t.me/BazarTcmBot', '_blank')">Добавить объявление</button>
-    `;
-    catSection.appendChild(div);
-  });
-</script>
-
-</body>
-</html>
+<section class="categories" id="categories">
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&h=250&q=80" alt="Авто">
+    <p>Авто</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1560185008-5bf9f93d1a2c?auto=format&fit=crop&w=400&h=250&q=80" alt="Недвижимость">
+    <p>Недвижимость</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=400&h=250&q=80" alt="Работа">
+    <p>Работа</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1521335629791-ce4aec67dd53?auto=format&fit=crop&w=400&h=250&q=80" alt="Одежда">
+    <p>Одежда и обувь</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&h=250&q=80" alt="Хобби">
+    <p>Хобби и отдых</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=400&h=250&q=80" alt="Животные">
+    <p>Животные</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1581093588401-22aa2cfa4b3a?auto=format&fit=crop&w=400&h=250&q=80" alt="Бизнес">
+    <p>Бизнес и оборудование</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1521790366321-3a61c1c93a48?auto=format&fit=crop&w=400&h=250&q=80" alt="Услуги">
+    <p>Услуги</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&h=250&q=80" alt="Электроника">
+    <p>Электроника</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1505691723518-36a5ac3be353?auto=format&fit=crop&w=400&h=250&q=80" alt="Для дома">
+    <p>Для дома</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1588345921523-4b6969bd1b7a?auto=format&fit=crop&w=400&h=250&q=80" alt="Запчасти">
+    <p>Запчасти</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1611078489938-6f9533b789a9?auto=format&fit=crop&w=400&h=250&q=80" alt="Детские товары">
+    <p>Детские товары</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8c7?auto=format&fit=crop&w=400&h=250&q=80" alt="Путешествия">
+    <p>Путешествия</p>
+  </div>
+  <div class="category">
+    <img src="https://images.unsplash.com/photo-1522336572468-97b06e8ef143?auto=format&fit=crop&w=400&h=250&q=80" alt="Красота">
+    <p>Красота и здоровье</p>
+  </div>
+</section>
