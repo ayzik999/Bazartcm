@@ -49,9 +49,18 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    .category button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #28a745;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .category button:hover {
+      background: #218838;
     }
     footer {
       background: #222;
@@ -74,7 +83,7 @@
 
 <header>₿AZAR TCM — рынок без границ</header>
 
-<nav id="menu">
+<nav>
   <a href="#">Авто</a>
   <a href="#">Недвижимость</a>
   <a href="#">Работа</a>
@@ -118,12 +127,15 @@
     "Красота и здоровье"
   ];
 
-  // Рисуем только карточки
+  // Рисуем карточки с кнопкой
   const catSection = document.getElementById("categories");
   categories.forEach(cat => {
     const div = document.createElement("div");
     div.className = "category";
-    div.textContent = cat;
+    div.innerHTML = `
+      <h3>${cat}</h3>
+      <button onclick="window.open('https://t.me/BazarTcmBot', '_blank')">Добавить объявление</button>
+    `;
     catSection.appendChild(div);
   });
 </script>
