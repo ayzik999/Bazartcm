@@ -8,9 +8,24 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #b1e2b1;
-      color: #333;
+      background: #b1e2b1; /* основной фон */
+      position: relative;
+      z-index: 0;
     }
+
+    /* Узор поверх фона */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("https://i.imgur.com/RiwnVdD.png") repeat;
+      opacity: 0.2; /* 20% прозрачность */
+      z-index: -1;
+    }
+
     header {
       background: #222;
       color: white;
@@ -39,13 +54,13 @@
       padding: 8px 15px;
       border: none;
       border-radius: 6px;
-      background: #28a745;
+      background: #3399ff; /* голубые кнопки */
       color: white;
       font-size: 14px;
       cursor: pointer;
     }
     .category button:hover {
-      background: #218838;
+      background: #287acc;
     }
     footer {
       background: #222;
@@ -68,7 +83,6 @@
 
 <header>₿AZAR TCM — рынок без границ</header>
 
-<!-- ТОЛЬКО карточки категорий -->
 <section class="categories" id="categories"></section>
 
 <footer>
@@ -78,7 +92,6 @@
 </footer>
 
 <script>
-  // Список категорий
   const categories = [
     "Авто",
     "Недвижимость",
@@ -96,7 +109,6 @@
     "Красота и здоровье"
   ];
 
-  // Рисуем карточки с кнопкой
   const catSection = document.getElementById("categories");
   categories.forEach(cat => {
     const div = document.createElement("div");
