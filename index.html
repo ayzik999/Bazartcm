@@ -7,16 +7,18 @@
   <style>
    
     body::before {
-      content: "";
-      position: fixed;
-      inset: 0; /* top:0; right:0; bottom:0; left:0; */
-      background-image: url('uzor.jpg');
-      background-repeat: repeat;
-      background-position: center;
-      background-size: 400px; /* подбери под свой узор: 300/400/600 */
-      opacity: 0.9; 
-      pointer-events: none; /* узор не мешает кликам */
-      z-index: 0;
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('uzor.jpg'); /* путь исправлен */
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 400px;
+  opacity: 0.2; /* прозрачность 20% */
+  pointer-events: none;
+  z-index: 0;
+}
+
     }
 
     /* Содержимое поверх узора: задаём z-index > 0 */
