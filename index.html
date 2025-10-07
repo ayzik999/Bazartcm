@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>₿AZAR TCM — рынок без границ</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #b1e2b1;
-      color: #333;
-    }
+    body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('uzor.jpg'); /* путь исправлен */
+  background-repeat: repeat;
+  background-position: center;
+  background-size: 400px;
+  opacity: 0.2; /* прозрачность 20% */
+  pointer-events: none;
+  z-index: 0;
+}
+
     header {
       background: #222;
       color: white;
