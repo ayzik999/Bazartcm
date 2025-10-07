@@ -18,7 +18,7 @@
     /* Узор поверх зелёного фона:
        - поменяй путь в background-image, если файл будет в другом месте
        - background-size — размер плитки (400px, 300px и т.д.)
-       - opacity — видимость узора (0.2 = 20%)
+       - opacity — видимость узора (1 = 100%)
     */
     body::before {
       content: "";
@@ -28,7 +28,7 @@
       background-repeat: repeat;
       background-position: center;
       background-size: 400px; /* подбери под свой узор: 300/400/600 */
-      opacity: 10; /* 0.5 = 50% видимость */
+      opacity: 100; /* 0.5 = 50% видимость */
       pointer-events: none; /* узор не мешает кликам */
       z-index: 0;
     }
