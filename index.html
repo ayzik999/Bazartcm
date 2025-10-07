@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
+      background: #b1e2b1;
       color: #333;
     }
     header {
@@ -18,21 +18,6 @@
       text-align: center;
       font-size: 22px;
       font-weight: bold;
-    }
-    nav {
-      background: #444;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      padding: 12px 18px;
-      display: block;
-    }
-    nav a:hover {
-      background: #666;
     }
     .categories {
       display: grid;
@@ -49,9 +34,18 @@
       cursor: pointer;
       transition: 0.3s;
     }
-    .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    .category button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #28a745;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .category button:hover {
+      background: #218838;
     }
     footer {
       background: #222;
@@ -74,45 +68,46 @@
 
 <header>₿AZAR TCM — рынок без границ</header>
 
-<nav>
-  <a href="#">Авто</a>
-  <a href="#">Недвижимость</a>
-  <a href="#">Работа</a>
-  <a href="#">Одежда и обувь</a>
-  <a href="#">Хобби и отдых</a>
-  <a href="#">Животные</a>
-  <a href="#">Бизнес и оборудование</a>
-  <a href="#">Услуги</a>
-  <a href="#">Электроника</a>
-  <a href="#">Для дома</a>
-  <a href="#">Запчасти</a>
-  <a href="#">Детские товары</a>
-  <a href="#">Путешествия</a>
-  <a href="#">Красота и здоровье</a>
-</nav>
-
-<section class="categories">
-  <div class="category">Авто</div>
-  <div class="category">Недвижимость</div>
-  <div class="category">Работа</div>
-  <div class="category">Одежда и обувь</div>
-  <div class="category">Хобби и отдых</div>
-  <div class="category">Животные</div>
-  <div class="category">Бизнес и оборудование</div>
-  <div class="category">Услуги</div>
-  <div class="category">Электроника</div>
-  <div class="category">Для дома</div>
-  <div class="category">Запчасти</div>
-  <div class="category">Детские товары</div>
-  <div class="category">Путешествия</div>
-  <div class="category">Красота и здоровье</div>
-</section>
+<!-- ТОЛЬКО карточки категорий -->
+<section class="categories" id="categories"></section>
 
 <footer>
   <p>₿AZAR TCM — рынок без границ © 2025</p>
   <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
   <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
 </footer>
+
+<script>
+  // Список категорий
+  const categories = [
+    "Авто",
+    "Недвижимость",
+    "Работа",
+    "Одежда и обувь",
+    "Хобби и отдых",
+    "Животные",
+    "Бизнес и оборудование",
+    "Услуги",
+    "Электроника",
+    "Для дома",
+    "Запчасти",
+    "Детские товары",
+    "Путешествия",
+    "Красота и здоровье"
+  ];
+
+  // Рисуем карточки с кнопкой
+  const catSection = document.getElementById("categories");
+  categories.forEach(cat => {
+    const div = document.createElement("div");
+    div.className = "category";
+    div.innerHTML = `
+      <h3>${cat}</h3>
+      <button onclick="window.open('https://t.me/BazarTcmBot', '_blank')">Добавить объявление</button>
+    `;
+    catSection.appendChild(div);
+  });
+</script>
 
 </body>
 </html>
