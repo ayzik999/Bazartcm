@@ -2,105 +2,117 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>₿AZAR TCM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>₿AZAR TCM — рынок без границ</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
       margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
     }
     header {
-      text-align: center;
-      padding: 20px;
-      background: #000;
-      color: #00ff88;
-      font-size: 26px;
-      font-weight: bold;
-    }
-    header img {
-      max-height: 60px;
-      display: block;
-      margin: 0 auto 10px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .card-body {
+      background: #222;
+      color: white;
       padding: 15px;
-    }
-    .card-title {
-      font-size: 18px;
+      text-align: center;
+      font-size: 22px;
       font-weight: bold;
-      margin-bottom: 8px;
-      color: #222;
     }
-    .card-desc {
-      font-size: 14px;
-      color: #555;
-      margin-bottom: 15px;
+    nav {
+      background: #444;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .btn {
-      display: inline-block;
-      padding: 10px 15px;
-      background: #00cc66;
+    nav a {
       color: white;
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: 0.2s;
+      padding: 12px 18px;
+      display: block;
     }
-    .btn:hover {
-      background: #00994d;
+    nav a:hover {
+      background: #666;
+    }
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      padding: 20px;
+    }
+    .category {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+    footer a {
+      color: #00aced;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="₿AZAR TCM"> <!-- сюда твой логотип -->
-    ₿AZAR TCM — рынок без границ
-  </header>
-  <div class="grid" id="products"></div>
 
-  <script>
-    async function loadProducts() {
-      const res = await fetch("products.json");
-      const products = await res.json();
-      const container = document.getElementById("products");
+<header>₿AZAR TCM — рынок без границ</header>
 
-      products.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <img src="${p.img}" alt="${p.title}">
-          <div class="card-body">
-            <div class="card-title">${p.title}</div>
-            <div class="card-desc">${p.desc}</div>
-            <a href="${p.link}" target="_blank" class="btn">Связаться</a>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-    loadProducts();
-  </script>
+<nav>
+  <a href="#">Авто</a>
+  <a href="#">Недвижимость</a>
+  <a href="#">Работа</a>
+  <a href="#">Одежда и обувь</a>
+  <a href="#">Хобби и отдых</a>
+  <a href="#">Животные</a>
+  <a href="#">Бизнес и оборудование</a>
+  <a href="#">Услуги</a>
+  <a href="#">Электроника</a>
+  <a href="#">Для дома</a>
+  <a href="#">Запчасти</a>
+  <a href="#">Детские товары</a>
+  <a href="#">Путешествия</a>
+  <a href="#">Красота и здоровье</a>
+</nav>
+
+<section class="categories">
+  <div class="category">Авто</div>
+  <div class="category">Недвижимость</div>
+  <div class="category">Работа</div>
+  <div class="category">Одежда и обувь</div>
+  <div class="category">Хобби и отдых</div>
+  <div class="category">Животные</div>
+  <div class="category">Бизнес и оборудование</div>
+  <div class="category">Услуги</div>
+  <div class="category">Электроника</div>
+  <div class="category">Для дома</div>
+  <div class="category">Запчасти</div>
+  <div class="category">Детские товары</div>
+  <div class="category">Путешествия</div>
+  <div class="category">Красота и здоровье</div>
+</section>
+
+<footer>
+  <p>₿AZAR TCM — рынок без границ © 2025</p>
+  <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
+  <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+</footer>
+
 </body>
 </html>
