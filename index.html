@@ -1,138 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>₿AZAR TCM — рынок без границ</title>
-<link rel="icon" href="">
-<style>
-  :root{--green:#b1e2b1;--btn:#4a90e2}
-  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--green);color:#222}
-  header{background:#222;color:#fff;padding:14px 16px;text-align:center;font-weight:700}
-  .container{max-width:1100px;margin:18px auto;padding:0 16px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-  .card{background:rgba(255,255,255,0.9);border-radius:8px;padding:0;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.12)}
-  .thumb{width:100%;height:160px;object-fit:cover;background:#eee}
-  .body{padding:12px}
-  .title{font-size:16px;font-weight:700;margin:0 0 6px}
-  .cat{font-size:13px;color:#666;margin-bottom:8px}
-  .price{font-size:18px;color:#111;font-weight:700;margin-bottom:8px}
-  .contact{font-size:13px;color:#333}
-  .btn{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:6px;background:var(--btn);color:#fff;text-decoration:none}
-  footer{margin-top:28px;background:#222;color:#fff;padding:14px;text-align:center}
-  .topbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:10px 0}
-  .catbtn{background:#fff;padding:8px 12px;border-radius:20px;border:1px solid #e6e6e6}
-  @media(max-width:520px){.thumb{height:130px}}
-</style>
+  <meta charset="UTF-8">
+  <title>₿AZAR TCM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      color: #00ff88;
+      font-size: 26px;
+      font-weight: bold;
+    }
+    header img {
+      max-height: 60px;
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 15px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #222;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #00cc66;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .btn:hover {
+      background: #00994d;
+    }
+  </style>
 </head>
 <body>
-<header>₿AZAR TCM — рынок без границ</header>
-<div class="container">
-  <div class="topbar" id="topbar">
-    <!-- категории (заполним JS) -->
-  </div>
+  <header>
+    <img src="logo.png" alt="₿AZAR TCM"> <!-- сюда твой логотип -->
+    ₿AZAR TCM — рынок без границ
+  </header>
+  <div class="grid" id="products"></div>
 
-  <div id="list" class="grid">
-    <!-- карточки -->
-  </div>
-</div>
+  <script>
+    async function loadProducts() {
+      const res = await fetch("products.json");
+      const products = await res.json();
+      const container = document.getElementById("products");
 
-<footer>
-  <div>₿AZAR TCM — рынок без границ © <span id="year"></span></div>
-  <div>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" style="color:#9fd6ff">@BazarTcmBot</a></div>
-  <div style="margin-top:6px"><a href="#" style="color:#9fd6ff">Политика конфиденциальности</a> | <a href="#" style="color:#9fd6ff">Пользовательское соглашение</a></div>
-</footer>
-
-<!-- PapaParse CDN для удобного парсинга CSV -->
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<script>
-const SHEET_CSV_URL = "PASTE_YOUR_PUBLISHED_CSV_URL_HERE"; // <- ВСТАВЬ СЮДА CSV URL из Google Sheets
-
-const categories = ["Авто","Недвижимость","Работа","Одежда и обувь","Хобби и отдых","Животные","Бизнес и оборудование","Услуги","Электроника","Для дома","Запчасти","Детские товары","Путешествия","Красота и здоровье"];
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-// Создаём кнопки категорий
-const topbar = document.getElementById('topbar');
-categories.forEach(c=>{
-  const b = document.createElement('button');
-  b.className='catbtn';
-  b.textContent=c;
-  b.onclick=()=> filterByCategory(c);
-  topbar.appendChild(b);
-});
-
-// загрузка CSV и рендер карточек
-function loadAndRender(){
-  if(!SHEET_CSV_URL || SHEET_CSV_URL.includes("PASTE_YOUR")) {
-    document.getElementById('list').innerHTML = '<div style="grid-column:1/-1;padding:20px;background:#fff;border-radius:8px">Пожалуйста вставьте URL вашей опубликованной Google Sheet CSV в переменную <code>SHEET_CSV_URL</code> в index.html</div>';
-    return;
-  }
-  Papa.parse(SHEET_CSV_URL, {
-    download: true,
-    header: true,
-    skipEmptyLines: true,
-    complete: function(results) {
-      const data = results.data;
-      renderCards(data);
-    },
-    error: function(err){ document.getElementById('list').innerHTML = '<div style="grid-column:1/-1;padding:20px;background:#fff;border-radius:8px">Ошибка при загрузке CSV: '+err.message+'</div>';}
-  });
-}
-
-function renderCards(data){
-  const list = document.getElementById('list');
-  list.innerHTML='';
-  // фильтруем – только web_published == true или status == published
-  const filtered = data.filter(r => (r.web_published && r.web_published.toLowerCase().trim() === 'true') || (r.status && r.status.toLowerCase().trim() === 'published'));
-  if(filtered.length===0){
-    list.innerHTML = '<div style="grid-column:1/-1;padding:20px;background:#fff;border-radius:8px">Пока нет опубликованных объявлений.</div>';
-    return;
-  }
-  filtered.reverse().forEach(r=>{
-    const url = r.photo_url || '';
-    const title = r.title || 'Без названия';
-    const cat = r.category || '';
-    const price = r.price || '';
-    const desc = r.description || '';
-    const contact = r.contact || '';
-    const id = r.id || '';
-
-    const card = document.createElement('div'); card.className='card';
-    const img = document.createElement('img'); img.className='thumb'; img.src = url || 'https://via.placeholder.com/600x360?text=Фото';
-    const body = document.createElement('div'); body.className='body';
-    body.innerHTML = '<div class="title">'+escapeHtml(title)+'</div><div class="cat">'+escapeHtml(cat)+'</div><div class="price">'+escapeHtml(price)+'</div><div class="contact">Контакт: '+escapeHtml(contact)+'</div>';
-    const btn = document.createElement('a'); btn.className='btn'; btn.href = 'https://t.me/BazarTcmBot?start=ad_'+encodeURIComponent(id); btn.target='_blank'; btn.textContent='Связаться';
-    body.appendChild(btn);
-
-    card.appendChild(img);
-    card.appendChild(body);
-    list.appendChild(card);
-  });
-}
-
-function filterByCategory(cat){
-  Papa.parse(SHEET_CSV_URL, {download:true,header:true,skipEmptyLines:true,complete:function(res){
-    const arr = res.data.filter(r => ((r.web_published && r.web_published.toLowerCase().trim() === 'true') || (r.status && r.status.toLowerCase().trim() === 'published')) && (r.category && r.category.toLowerCase().includes(cat.toLowerCase())));
-    const list = document.getElementById('list'); list.innerHTML='';
-    if(arr.length===0){ list.innerHTML = '<div style="grid-column:1/-1;padding:20px;background:#fff;border-radius:8px">Нет объявлений в этой категории.</div>'; return; }
-    arr.reverse().forEach(r=>{
-      const card = document.createElement('div'); card.className='card';
-      const img = document.createElement('img'); img.className='thumb'; img.src = r.photo_url || 'https://via.placeholder.com/600x360?text=Фото';
-      const body = document.createElement('div'); body.className='body';
-      body.innerHTML = '<div class="title">'+escapeHtml(r.title||'')+'</div><div class="cat">'+escapeHtml(r.category||'')+'</div><div class="price">'+escapeHtml(r.price||'')+'</div><div class="contact">Контакт: '+escapeHtml(r.contact||'')+'</div>';
-      const btn = document.createElement('a'); btn.className='btn'; btn.href = 'https://t.me/BazarTcmBot?start=ad_'+encodeURIComponent(r.id||''); btn.target='_blank'; btn.textContent='Связаться';
-      body.appendChild(btn);
-      card.appendChild(img); card.appendChild(body); list.appendChild(card);
-    });
-  }});
-}
-
-function escapeHtml(s){
-  return (s||'').toString().replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
-}
-
-loadAndRender();
-</script>
+      products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}">
+          <div class="card-body">
+            <div class="card-title">${p.title}</div>
+            <div class="card-desc">${p.desc}</div>
+            <a href="${p.link}" target="_blank" class="btn">Связаться</a>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+    loadProducts();
+  </script>
 </body>
 </html>
