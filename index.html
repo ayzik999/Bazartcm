@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>₿AZAR TCM — рынок без границ</title>
   <style>
+    /* === Основные стили === */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -16,19 +16,21 @@
       overflow-x: hidden;
     }
 
+    /* === Узор фона === */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background-image: url('uzor.jpg');
+      background-image: url('uzor.jpg'); /* путь к файлу */
       background-repeat: repeat;
       background-position: center;
       background-size: 400px;
-      opacity: 0.2;
+      opacity: 0.8; /* прозрачность 80% */
       pointer-events: none;
       z-index: 0;
     }
 
+    /* Контейнер для содержимого поверх узора */
     .site {
       position: relative;
       z-index: 1;
@@ -51,11 +53,100 @@
     }
 
     .category {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.85); /* полупрозрачные карточки */
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       text-align: center;
       padding: 20px;
       cursor: pointer;
       transition: 0.3s;
-   
+    }
+
+    .category:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .category button {
+      margin-top: 10px;
+      padding: 8px 15px;
+      border: none;
+      border-radius: 6px;
+      background: #4a90e2; /* голубой */
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .category button:hover {
+      background: #3578c4;
+    }
+
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #00aced;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header>₿AZAR TCM — рынок без границ</header>
+
+    <!-- Карточки категорий -->
+    <section class="categories" id="categories"></section>
+
+    <footer>
+      <p>₿AZAR TCM — рынок без границ © 2025</p>
+      <p>Размещение объявлений через Telegram 
+        <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a>
+      </p>
+      <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Список категорий
+    const categories = [
+      "Авто",
+      "Недвижимость",
+      "Работа",
+      "Одежда и обувь",
+      "Хобби и отдых",
+      "Животные",
+      "Бизнес и оборудование",
+      "Услуги",
+      "Электроника",
+      "Для дома",
+      "Запчасти",
+      "Детские товары",
+      "Путешествия",
+      "Красота и здоровье"
+    ];
+
+    // Отображаем карточки категорий
+    const catSection = document.getElementById("categories");
+    categories.forEach(cat => {
+      const div = document.createElement("div");
+      div.className = "category";
+      div.innerHTML = `
+        <h3>${cat}</h3>
+        <button onclick="window.open('https://t.me/BazarTcmBot', '_blank')">Добавить объявление</button>
+      `;
+      catSection.appendChild(div);
+    });
+  </script>
+</body>
+</html>
