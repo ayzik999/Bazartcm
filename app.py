@@ -1,22 +1,33 @@
 from flask import Flask, render_template, jsonify
-import json, os
+import json
+import os
 
 app = Flask(__name__)
 
-# Главная
+# Главная страница с категориями
 @app.route('/')
 def index():
     return render_template('index.html')
 
-# Страница категории
-@app.route('/category/<name>')
-def category_page(name):
+# Страница с объявлениями по категории
+@app.route('/category/<cat>')
+def category(cat):
     ads = []
     if os.path.exists('ads.json'):
-        with open('ads.json','r',encoding='utf-8') as f:
+        with open('ads.json', 'r', encoding='utf-8') as f:
+            ads = json.load(f)
+    # Фильтруем объявления по категории
+    cat_ads = [ad for ad in ads if ad.get('category', 'Авто')==cat]
+    return render_template('category.html', category=cat, ads=cat_ads)
+
+# API для всех объявлений
+@app.route('/ads.json')
+def get_ads():
+    if os.path.exists('ads.json'):
+        with open('ads.json', 'r', encoding='utf-8') as f:
             data = json.load(f)
-        ads = [ad for ad in data if ad['title'].lower().find(name.lower())!=-1]
-    return render_template('category.html', category=name, ads=ads)
+        return jsonify(data)
+    return jsonify([])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
