@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Автообъявления — ₿AZAR TCM</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <h1>Автообъявления</h1>
+  <ul>
+    {% for ad in ads %}
+      <li>
+        {{ ad.brand }} {{ ad.model }} — {{ ad.price }} {{ ad.currency }} — {{ ad.color }} — {{ ad.condition }} — {{ ad.body }}
+      </li>
+    {% endfor %}
+    {% if ads|length == 0 %}
+      <li>Объявления не найдены</li>
+    {% endif %}
+  </ul>
+  <p><a href="/">← На главную</a></p>
+</body>
+</html>
