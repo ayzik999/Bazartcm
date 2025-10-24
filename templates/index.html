@@ -5,25 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>₿AZAR TCM</title>
 <link rel="stylesheet" href="/static/css/style.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
-
 <header>
   <h1>₿AZAR TCM — Рынок без границ</h1>
 </header>
 
-<section class="categories">
-  {% for cat in categories %}
-    <div class="category">
-      <a href="/{{ cat.link }}">{{ cat.name }}</a>
-    </div>
-  {% endfor %}
-</section>
-
-<footer>
-  <p>₿AZAR TCM © 2025 — Размещение через Telegram <a href="https://t.me/BazarTcmBot">@BazarTcmBot</a></p>
-</footer>
-
+<main style="padding:20px;">
+  <h2>Категории</h2>
+  <ul>
+    <li><a href="/category/Авто">Авто</a></li>
+    <li><a href="/category/Недвижимость">Недвижимость</a></li>
+    <li><a href="/category/Работа">Работа</a></li>
+    <li><a href="/category/Электроника">Электроника</a></li>
+  </ul>
+</main>
 </body>
 </html>
