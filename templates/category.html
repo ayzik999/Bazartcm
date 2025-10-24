@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>₿AZAR TCM — {{ category }}</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>{{ category|capitalize }} — Объявления</h1>
+</header>
+
+<div class="filters">
+  <input type="text" id="searchInput" placeholder="Поиск по объявлениям...">
+  <select id="filterCondition">
+    <option value="">Все состояния</option>
+    <option value="new">Новое</option>
+    <option value="used">С пробегом</option>
+  </select>
+</div>
+
+<section id="adsContainer">
+  {% if ads %}
+    {% for ad in ads %}
+      <div class="ad">
+        <h3>{{ ad.title }}</h3>
+        <p>{{ ad.price }} {{ ad.currency }}</p>
+        <p>От: {{ ad.user }} | {{ ad.date }} | {{ ad.condition }}</p>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>Объявлений нет</p>
+  {% endif %}
+</section>
+
+<script>
+const ads = {{ ads|tojson }};
+const searchInput = document.getElementById('searchInput');
+const filterCondition = document.getElementById('filterCondition');
+const container = document.getElementById('adsContainer');
+
+function renderAds(list){
+  container.innerHTML = '';
+  if(!list.length){ container.innerHTML='<p>Объявления не найдены</p>'; return; }
+  list.forEach(ad=>{
+    const div=document.createElement('div');
+    div.className='ad';
+    div.innerHTML=`<h3>${ad.title}</h3>
+                   <p>${ad.price} ${ad.currency}</p>
+                   <p>От: ${ad.user} | ${ad.date} | ${ad.condition}</p>`;
+    container.appendChild(div);
+  });
+}
+
+function applyFilters(){
+  const q = searchInput.value.toLowerCase();
+  const cond = filterCondition.value;
+  const filtered = ads.filter(ad=>{
+    let ok = ad.title.toLowerCase().includes(q) || ad.user.toLowerCase().includes(q);
+    if(cond) ok = ok && ad.condition===cond;
+    return ok;
+  });
+  renderAds(filtered);
+}
+
+searchInput.addEventListener('input', applyFilters);
+filterCondition.addEventListener('change', applyFilters);
+</script>
+
+</body>
+</html>
