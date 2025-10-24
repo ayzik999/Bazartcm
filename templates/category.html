@@ -4,22 +4,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>₿AZAR TCM — {{ category }}</title>
-<link rel="stylesheet" href="/static/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <style>
-body {margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#333;}
+body {margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#333;min-height:100vh;}
 header{display:flex;justify-content:space-between;align-items:center;background:#222;padding:10px 20px;color:white;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
 .logo{font-size:24px;font-weight:bold;color:#4a90e2;}
+.header-center{flex:1;max-width:500px;margin:5px 10px;display:flex;}
+.header-center input{flex:1;padding:6px 10px;border-radius:4px 0 0 4px;border:none;}
+.header-center button{padding:6px 12px;background:#4a90e2;color:white;border:none;border-radius:0 4px 4px 0;cursor:pointer;}
+.header-center button:hover{background:#3578c4;}
+.header-right .add-btn{padding:8px 15px;background:#4a90e2;color:white;border:none;border-radius:6px;cursor:pointer;}
+.header-right .add-btn:hover{background:#3578c4;}
 .filters{display:flex;gap:10px;padding:15px;background:white;flex-wrap:wrap;}
-.filters input, .filters select{padding:6px;border-radius:4px;border:1px solid #ccc;}
-.ads-container{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px;}
-.ad{background:white;padding:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);display:flex;flex-direction:column;justify-content:space-between;transition:0.3s;}
-.ad:hover{transform:translateY(-3px);box-shadow:0 6px 12px rgba(0,0,0,0.2);}
-.ad-title{font-weight:bold;font-size:16px;margin-bottom:4px;color:#222;}
+.filters select,.filters input{padding:6px;border-radius:4px;border:1px solid #ccc;}
+.ads-container{padding:20px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px;}
+.ad{background:white;padding:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);transition:0.3s;}
+.ad:hover{transform:translateY(-2px);box-shadow:0 6px 12px rgba(0,0,0,0.15);}
+.ad-title{font-weight:bold;font-size:16px;margin-bottom:4px;}
 .ad-price{color:green;font-weight:bold;margin-bottom:4px;}
-.ad-meta{font-size:13px;color:#666;margin-bottom:8px;}
-.ad button{align-self:flex-start;padding:6px 10px;background:#4a90e2;color:white;border:none;border-radius:4px;cursor:pointer;}
-.ad button:hover{background:#3578c4;}
+.ad-meta{font-size:13px;color:#666;}
 footer{background:#222;color:white;text-align:center;padding:20px;font-size:14px;margin-top:20px;}
 footer a{color:#00aced;text-decoration:none;}
 footer a:hover{text-decoration:underline;}
@@ -28,69 +31,75 @@ footer a:hover{text-decoration:underline;}
 <body>
 
 <header>
-  <div class="logo">₿AZAR TCM</div>
-  <div class="filters">
+  <div class="logo">₿AZAR <span>TCM</span></div>
+  <div class="header-center">
     <input type="text" id="searchInput" placeholder="Поиск: марка, модель, цвет...">
-    <select id="filterCondition">
-      <option value="">Все состояния</option>
-      <option value="new">Новое</option>
-      <option value="used">С пробегом</option>
-    </select>
+    <button onclick="applyFilters()">Найти</button>
+  </div>
+  <div class="header-right">
+    <button class="add-btn" onclick="window.open('https://t.me/BazarTcmBot','_blank')">➕ Разместить объявление</button>
   </div>
 </header>
 
+<div class="filters">
+  <select id="filterCondition">
+    <option value="">Все состояния</option>
+    <option value="new">Новое</option>
+    <option value="used">С пробегом</option>
+  </select>
+  <input type="number" id="priceMin" placeholder="Цена от">
+  <input type="number" id="priceMax" placeholder="Цена до">
+</div>
+
 <section class="ads-container" id="adsContainer">
-  {% if ads %}
-    {% for ad in ads %}
-      <div class="ad">
-        <div class="ad-title">{{ ad.title }}</div>
-        <div class="ad-price">{{ ad.price }} {{ ad.currency }}</div>
-        <div class="ad-meta">От: {{ ad.user }} | {{ ad.date }} | {{ ad.condition == 'new' and 'Новое' or 'С пробегом' }}</div>
-        <button onclick="alert('Подробнее пока не настроено')">Подробнее</button>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p>Объявлений нет</p>
-  {% endif %}
+  <!-- Объявления подгрузятся сюда -->
 </section>
 
 <footer>
-  <p>₿AZAR TCM © 2025 — Размещение через Telegram <a href="https://t.me/BazarTcmBot">@BazarTcmBot</a></p>
+  <p>₿AZAR TCM — рынок без границ © 2025</p>
+  <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
 </footer>
 
 <script>
-const ads = {{ ads|tojson }};
-const searchInput = document.getElementById('searchInput');
-const filterCondition = document.getElementById('filterCondition');
-const container = document.getElementById('adsContainer');
+let ADS = {{ ads|tojson|safe }};
 
 function renderAds(list){
+  const container = document.getElementById('adsContainer');
   container.innerHTML = '';
-  if(!list.length){ container.innerHTML='<p>Объявления не найдены</p>'; return; }
+  if(!list.length){
+    container.innerHTML = '<p>Объявления не найдены</p>';
+    return;
+  }
   list.forEach(ad=>{
     const div=document.createElement('div');
     div.className='ad';
-    div.innerHTML=`<div class="ad-title">${ad.title}</div>
-                   <div class="ad-price">${ad.price} ${ad.currency}</div>
-                   <div class="ad-meta">От: ${ad.user} | ${ad.date} | ${ad.condition==='new'?'Новое':'С пробегом'}</div>
-                   <button onclick="alert('Подробнее пока не настроено')">Подробнее</button>`;
+    div.innerHTML=`
+      <div class="ad-title">${ad.title}</div>
+      <div class="ad-price">${ad.price} ${ad.currency}</div>
+      <div class="ad-meta">От: ${ad.user} | Дата: ${ad.date} | ${ad.condition==='new'?'Новое':'С пробегом'}</div>
+    `;
     container.appendChild(div);
   });
 }
 
 function applyFilters(){
-  const q = searchInput.value.toLowerCase();
-  const cond = filterCondition.value;
-  const filtered = ads.filter(ad=>{
-    let ok = ad.title.toLowerCase().includes(q) || ad.user.toLowerCase().includes(q);
-    if(cond) ok = ok && ad.condition===cond;
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const condition = document.getElementById('filterCondition').value;
+  const min = Number(document.getElementById('priceMin').value) || 0;
+  const max = Number(document.getElementById('priceMax').value) || Infinity;
+
+  const filtered = ADS.filter(ad=>{
+    const text = (ad.title+' '+(ad.user||'')).toLowerCase();
+    const priceNum = Number(ad.price.replace(/\s/g,''));
+    let ok = text.includes(q) && priceNum>=min && priceNum<=max;
+    if(condition) ok = ok && ad.condition===condition;
     return ok;
   });
   renderAds(filtered);
 }
 
-searchInput.addEventListener('input', applyFilters);
-filterCondition.addEventListener('change', applyFilters);
+// Инициализация
+renderAds(ADS);
 </script>
 
 </body>
