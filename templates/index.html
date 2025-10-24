@@ -3,15 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>₿AZAR TCM</title>
+<title>₿AZAR TCM — Рынок без границ</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/static/css/style.css">
+<style>
+body {margin:0; font-family:Arial,sans-serif; background:#b1e2b1; min-height:100vh; color:#333;}
+body::before {content:"";position:fixed;inset:0;background-image:url('/static/uzor.jpg');background-repeat:repeat;background-size:400px;opacity:0.8;z-index:0;pointer-events:none;}
+header{display:flex;justify-content:space-between;align-items:center;background:#222;padding:10px 20px;color:white;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-size:24px;font-weight:bold;}
+.tcm{font-family:'Courier New', monospace;color:#4a90e2;}
+.header-center{display:flex;flex:1;max-width:500px;margin:5px 10px;}
+.header-center input{flex:1;padding:6px 10px;border-radius:4px 0 0 4px;border:none;}
+.header-center button{padding:6px 12px;background:#4a90e2;color:white;border:none;border-radius:0 4px 4px 0;cursor:pointer;}
+.header-center button:hover{background:#3578c4;}
+.header-right .add-btn{padding:8px 15px;background:#4a90e2;color:white;border:none;border-radius:6px;cursor:pointer;}
+.header-right .add-btn:hover{background:#3578c4;}
+
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;padding:20px;position:relative;z-index:1;}
+.category{background: rgba(255,255,255,0.9); border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); text-align:center; padding:20px; cursor:pointer; transition:0.3s; position:relative;}
+.category:hover{transform:translateY(-3px); box-shadow:0 6px 12px rgba(0,0,0,0.25);}
+.category i{font-size:36px;margin-bottom:10px;color:#4a90e2;}
+
+footer{background:#222;color:white;text-align:center;padding:20px;font-size:14px;}
+footer a{color:#00aced;text-decoration:none;}
+footer a:hover{text-decoration:underline;}
+
+@media(max-width:768px){
+  header{flex-direction:column;align-items:flex-start;}
+  .header-center{width:100%;max-width:none;margin:5px 0;}
+  .header-right{width:100%;display:flex;justify-content:flex-start;margin-bottom:5px;}
+}
+</style>
 </head>
 <body>
+
 <header>
-  <h1>₿AZAR TCM — Рынок без границ</h1>
+  <div class="logo">₿AZAR <span class="tcm">TCM</span></div>
+  <div class="header-center">
+    <input type="text" placeholder="Поиск по объявлениям..." />
+    <button onclick="alert('Поиск пока не настроен')">Найти</button>
+  </div>
+  <div class="header-right">
+    <button class="add-btn" onclick="window.open('https://t.me/BazarTcmBot','_blank')">➕ Разместить объявление</button>
+  </div>
 </header>
-<main style="padding:20px;">
-  <p><a href="/cars">Перейти к автообъявлениям</a></p>
-</main>
+
+<section class="categories" id="categories"></section>
+
+<footer>
+  <p>₿AZAR TCM — рынок без границ © 2025</p>
+  <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
+  <p><a href="#">Политика конфиденциальности</a> | <a href="#">Пользовательское соглашение</a></p>
+</footer>
+
+<script>
+const categories = [
+  {name:"Авто", icon:"bi-car-front", link:"/cars"},
+  {name:"Недвижимость", icon:"bi-house-door", link:"#"},
+  {name:"Работа", icon:"bi-briefcase", link:"#"},
+  {name:"Одежда, обувь, аксессуары", icon:"bi-bag", link:"#"},
+  {name:"Хобби и отдых", icon:"bi-controller", link:"#"},
+  {name:"Животные", icon:"bi-paw", link:"#"},
+  {name:"Готовый бизнес и оборудование", icon:"bi-building", link:"#"},
+  {name:"Услуги", icon:"bi-tools", link:"#"},
+  {name:"Электроника", icon:"bi-phone", link:"#"},
+  {name:"Для дома и дачи", icon:"bi-lamp", link:"#"},
+  {name:"Запчасти", icon:"bi-gear", link:"#"},
+  {name:"Товары для детей", icon:"bi-emoji-smile", link:"#"},
+  {name:"Жильё для путешествия", icon:"bi-globe", link:"#"},
+  {name:"Красота и здоровье", icon:"bi-heart", link:"#"}
+];
+
+const catSection = document.getElementById("categories");
+categories.forEach(cat=>{
+  const div=document.createElement("div");
+  div.className="category";
+  div.innerHTML=`<i class="bi ${cat.icon}"></i><h3>${cat.name}</h3>`;
+  div.addEventListener("click",()=>{window.location.href=cat.link;});
+  catSection.appendChild(div);
+});
+</script>
+
 </body>
 </html>
