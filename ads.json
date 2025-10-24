@@ -1,5 +1,5 @@
 [
-  {"id":1,"title":"Toyota Camry","price":"1 250 000","currency":"сом","user":"Аман","date":"2025-10-24","condition":"used","category":"cars"},
-  {"id":2,"title":"BMW X5","price":"5 800 000","currency":"сом","user":"Алишер","date":"2025-10-20","condition":"new","category":"cars"},
-  {"id":3,"title":"Hyundai Solaris","price":"690 000","currency":"сом","user":"Марат","date":"2025-09-15","condition":"used","category":"cars"}
+  {"id":1,"title":"Toyota Camry","price":"1 250 000","currency":"сом","user":"Аман","date":"2025-10-24","condition":"used","category":"Авто"},
+  {"id":2,"title":"BMW X5","price":"5 800 000","currency":"сом","user":"Алишер","date":"2025-10-20","condition":"new","category":"Авто"},
+  {"id":3,"title":"Hyundai Solaris","price":"690 000","currency":"сом","user":"Марат","date":"2025-09-15","condition":"used","category":"Авто"}
 ]
