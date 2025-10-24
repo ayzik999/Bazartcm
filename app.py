@@ -1,118 +1,29 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>₿AZAR TCM — Автообъявления</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<style>
-body {margin:0;font-family:Arial,sans-serif;background:#f5f5f5;color:#333;}
-header{display:flex;justify-content:space-between;align-items:center;background:#222;padding:10px 20px;color:white;position:sticky;top:0;z-index:100;flex-wrap:wrap;}
-.logo{font-size:24px;font-weight:bold;}
-.header-center{flex:1;max-width:500px;margin:5px 10px;display:flex;}
-.header-center input{flex:1;padding:6px 10px;border-radius:4px 0 0 4px;border:none;}
-.header-center button{padding:6px 12px;background:#4a90e2;color:white;border:none;border-radius:0 4px 4px 0;cursor:pointer;}
-.header-center button:hover{background:#3578c4;}
-.header-right .add-btn{padding:8px 15px;background:#4a90e2;color:white;border:none;border-radius:6px;cursor:pointer;}
-.header-right .add-btn:hover{background:#3578c4;}
-.filters{display:flex;gap:10px;padding:15px;background:white;flex-wrap:wrap;}
-.filters select,.filters input{padding:6px;border-radius:4px;border:1px solid #ccc;}
-.ads-container{padding:20px;max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:15px;}
-.ad{background:white;padding:12px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,0.1);}
-.ad-title{font-weight:bold;font-size:16px;margin-bottom:4px;}
-.ad-price{color:green;font-weight:bold;margin-bottom:4px;}
-.ad-meta{font-size:13px;color:#666;}
-footer{background:#222;color:white;text-align:center;padding:20px;font-size:14px;margin-top:20px;}
-footer a{color:#00aced;text-decoration:none;}
-footer a:hover{text-decoration:underline;}
-</style>
-</head>
-<body>
+from flask import Flask, render_template, jsonify, send_from_directory
+import os
+import json
 
-<header>
-  <div class="logo">₿AZAR <span style="color:#4a90e2;">TCM</span></div>
-  <div class="header-center">
-    <input type="text" id="searchInput" placeholder="Поиск: марка, модель, цвет...">
-    <button onclick="applyFilters()">Найти</button>
-  </div>
-  <div class="header-right">
-    <button class="add-btn" onclick="window.open('https://t.me/BazarTcmBot','_blank')">➕ Разместить объявление</button>
-  </div>
-</header>
+app = Flask(__name__)
 
-<div class="filters">
-  <select id="filterCondition">
-    <option value="">Все состояния</option>
-    <option value="new">Новое</option>
-    <option value="used">С пробегом</option>
-  </select>
-  <input type="number" id="priceMin" placeholder="Цена от">
-  <input type="number" id="priceMax" placeholder="Цена до">
-</div>
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-<section class="ads-container" id="adsContainer">
-  <!-- Объявления подгрузятся сюда -->
-</section>
+@app.route('/cars')
+def cars():
+    return render_template('cars.html')
 
-<footer>
-  <p>₿AZAR TCM — рынок без границ © 2025</p>
-  <p>Размещение объявлений через Telegram <a href="https://t.me/BazarTcmBot" target="_blank">@BazarTcmBot</a></p>
-</footer>
+@app.route('/ads.json')
+def get_ads():
+    if os.path.exists('ads.json'):
+        with open('ads.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        return jsonify(data)
+    return jsonify([])
 
-<script>
-// Загрузка объявлений из ads.json
-let ADS = [];
-async function loadAds(){
-  try {
-    const res = await fetch('ads.json');
-    ADS = await res.json();
-    renderAds(ADS);
-  } catch(err){
-    console.error('Ошибка загрузки ads.json:', err);
-    document.getElementById('adsContainer').innerHTML = '<p>Не удалось загрузить объявления</p>';
-  }
-}
+# Статика
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
 
-// Фильтры
-function applyFilters(){
-  const q = document.getElementById('searchInput').value.trim().toLowerCase();
-  const condition = document.getElementById('filterCondition').value;
-  const min = Number(document.getElementById('priceMin').value) || 0;
-  const max = Number(document.getElementById('priceMax').value) || Infinity;
-
-  const filtered = ADS.filter(ad => {
-    const text = (ad.title + ' ' + (ad.user||'')).toLowerCase();
-    const priceNum = Number(ad.price.replace(/\s/g,''));
-    let ok = text.includes(q) && priceNum >= min && priceNum <= max;
-    if(condition) ok = ok && ad.condition === condition;
-    return ok;
-  });
-  renderAds(filtered);
-}
-
-// Отрисовка объявлений
-function renderAds(list){
-  const container = document.getElementById('adsContainer');
-  container.innerHTML = '';
-  if(!list.length){
-    container.innerHTML = '<p>Объявления не найдены</p>';
-    return;
-  }
-  list.forEach(ad => {
-    const div = document.createElement('div');
-    div.className = 'ad';
-    div.innerHTML = `
-      <div class="ad-title">${ad.title}</div>
-      <div class="ad-price">${ad.price} ${ad.currency}</div>
-      <div class="ad-meta">От: ${ad.user} | Дата: ${ad.date} | ${ad.condition === 'new' ? 'Новое' : 'С пробегом'}</div>
-    `;
-    container.appendChild(div);
-  });
-}
-
-// Инициализация
-loadAds();
-</script>
-
-</body>
-</html>
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
