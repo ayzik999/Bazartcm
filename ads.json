@@ -1,5 +1,0 @@
-[
-  {"id":1,"brand":"Toyota","model":"Camry","price":1250000,"currency":"сом","color":"Белый","condition":"used","body":"Седан","year":2017,"km":85000,"photo":null},
-  {"id":2,"brand":"BMW","model":"X5","price":4200000,"currency":"сом","color":"Чёрный","condition":"used","body":"Внедорожник","year":2020,"km":65000,"photo":null},
-  {"id":3,"brand":"Kia","model":"Rio","price":730000,"currency":"сом","color":"Красный","condition":"used","body":"Хэтчбек","year":2018,"km":70000,"photo":null}
-]
