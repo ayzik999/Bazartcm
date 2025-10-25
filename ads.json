@@ -1,5 +1,5 @@
 [
-  {"id":1,"title":"Toyota Camry","price":"1 250 000","currency":"сом","user":"Аман","date":"2025-10-24","condition":"used","category":"Авто"},
-  {"id":2,"title":"BMW X5","price":"5 800 000","currency":"сом","user":"Алишер","date":"2025-10-20","condition":"new","category":"Авто"},
-  {"id":3,"title":"Hyundai Solaris","price":"690 000","currency":"сом","user":"Марат","date":"2025-09-15","condition":"used","category":"Авто"}
+  {"id":1,"brand":"Toyota","model":"Camry","price":1250000,"currency":"сом","color":"Белый","condition":"used","body":"Седан","year":2017,"km":85000,"photo":null},
+  {"id":2,"brand":"BMW","model":"X5","price":4200000,"currency":"сом","color":"Чёрный","condition":"used","body":"Внедорожник","year":2020,"km":65000,"photo":null},
+  {"id":3,"brand":"Kia","model":"Rio","price":730000,"currency":"сом","color":"Красный","condition":"used","body":"Хэтчбек","year":2018,"km":70000,"photo":null}
 ]
