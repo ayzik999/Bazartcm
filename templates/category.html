@@ -1,72 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>₿AZAR TCM — {{ category }}</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-<link rel="stylesheet" href="/static/css/style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>₿AZAR TCM — автообъявления</title>
+<style>
+:root{--accent:#0b6efd;--bg:#f5f7f8;--card:#fff;--muted:#666;--radius:10px;--gap:16px;}
+*{box-sizing:border-box}
+body{margin:0;font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;background:var(--bg);color:#222;-webkit-font-smoothing:antialiased;}
+header{background:linear-gradient(90deg,var(--accent),#1466d6);color:#fff;padding:18px 20px;display:flex;gap:12px;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:30;}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:18px;}
+.brand .logo{width:44px;height:44px;border-radius:8px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;}
+.search{flex:1;max-width:760px;display:flex;gap:8px;}
+.search input{flex:1;padding:10px 12px;border-radius:8px;border:none;outline:none;}
+.search button{background:#fff;border:none;color:var(--accent);padding:10px 14px;border-radius:8px;font-weight:600;cursor:pointer;}
+.wrap{padding:20px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:320px 1fr;gap:var(--gap);}
+@media(max-width:900px){.wrap{grid-template-columns:1fr;padding:12px;}header{flex-wrap:wrap;}.search{max-width:none;width:100%;}}
+.panel{background:var(--card);padding:14px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(12,20,40,0.06);position:relative;}
+.panel h3{margin:0 0 10px;font-size:16px}
+.field{margin-bottom:10px}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+select,input[type="number"],input[type="text"]{width:100%;padding:8px 10px;border-radius:6px;border:1px solid #e6eef8}
+.row{display:flex;gap:8px}.small{flex:1}
+.checkboxes{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:6px 8px;border-radius:8px;background:#f1f6ff;border:1px solid #e6f0ff;font-size:13px;cursor:pointer}
+.chip.active{background:linear-gradient(180deg,#dbeaff,#c9e0ff);border-color:#a6c8ff}
+.actions{display:flex;gap:8px;margin-top:8px}
+.btn{flex:1;padding:10px;border-radius:8px;border:none;background:var(--accent);color:white;font-weight:700;cursor:pointer}
+.btn.ghost{background:#f3f7fb;color:var(--muted);border:1px solid #e6eef8}
+.results-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:12px}
+.sort{display:flex;gap:8px;align-items:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.card{background:var(--card);border-radius:12px;padding:10px;box-shadow:0 6px 18px rgba(12,20,40,0.05);overflow:hidden;display:flex;flex-direction:column;}
+.thumb{width:100%;height:140px;border-radius:10px;overflow:hidden;margin-bottom:8px;background:#efefef;display:flex;align-items:center;justify-content:center;color:#999;font-weight:600;}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.title{font-weight:700;font-size:15px}
+.price{color:#0a8d3b;font-weight:800}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.badge{background:#f3f7fb;border-radius:8px;padding:6px 8px;font-size:12px;color:#444}
+.muted{color:var(--muted);font-size:13px}
+.empty{padding:40px;border-radius:10px;text-align:center;color:var(--muted);background:#fff}
+.mb8{margin-bottom:8px}
+</style>
 </head>
 <body>
+
 <header>
-  <h1>₿AZAR TCM — {{ category }}</h1>
+  <div class="brand">
+    <div class="logo">₿</div>
+    <div>₿AZAR <span style="opacity:0.9;margin-left:6px;font-weight:600">TCM</span></div>
+  </div>
+  <div class="search" role="search">
+    <input id="q" placeholder="Поиск: марка, модель, цвет..." />
+    <button id="btnSearch">Найти</button>
+  </div>
+  <div style="min-width:140px;text-align:right;color:#fff;font-size:13px">Автообъявления</div>
 </header>
 
-<div class="filters">
-  <input type="text" id="searchInput" placeholder="Поиск...">
-  <select id="filterCondition">
-    <option value="">Все состояния</option>
-    <option value="new">Новое</option>
-    <option value="used">С пробегом</option>
-  </select>
-  <input type="number" id="priceMin" placeholder="Цена от">
-  <input type="number" id="priceMax" placeholder="Цена до">
-  <button onclick="applyFilters()">Найти</button>
-</div>
+<main class="wrap">
+  <aside class="panel" aria-label="Фильтры">
+    <h3>Фильтры</h3>
+    <div class="field">
+      <label>Марка</label>
+      <select id="filterBrand"><option value="">— Все марки —</option></select>
+    </div>
+    <div class="field">
+      <label>Модель</label>
+      <input id="filterModel" type="text" placeholder="Введите модель (частично)" />
+    </div>
+    <div class="field">
+      <label>Цена (сом)</label>
+      <div class="row">
+        <input id="priceMin" class="small" type="number" placeholder="От" min="0" />
+        <input id="priceMax" class="small" type="number" placeholder="До" min="0" />
+      </div>
+    </div>
+    <div class="field">
+      <label>Цвет</label>
+      <div class="checkboxes" id="colors"></div>
+    </div>
+    <div class="field">
+      <label>Состояние</label>
+      <div class="checkboxes">
+        <label class="chip" data-val=""><input type="radio" name="state" value="" style="display:none"> Все</label>
+        <label class="chip" data-val="new"><input type="radio" name="state" value="new" style="display:none"> Новый</label>
+        <label class="chip" data-val="used"><input type="radio" name="state" value="used" style="display:none"> С пробегом</label>
+      </div>
+    </div>
+    <div class="field">
+      <label>Тип кузова</label>
+      <div class="checkboxes" id="bodies"></div>
+    </div>
+    <div class="actions">
+      <button id="apply" class="btn">Применить</button>
+      <button id="clear" class="btn ghost">Сбросить</button>
+    </div>
+    <div style="margin-top:12px;font-size:13px;color:var(--muted)">Показано <strong id="count">0</strong> объявления(й)</div>
+  </aside>
 
-<section class="ads-container" id="adsContainer">
-  <!-- Объявления -->
-</section>
-
-<footer>
-  <p>₿AZAR TCM — рынок без границ © 2025</p>
-</footer>
+  <section>
+    <div class="panel" style="padding:12px 14px 16px;">
+      <div class="results-header">
+        <div>
+          <strong id="resultsTitle">Последние объявления</strong><div class="muted" style="font-size:13px">— Автомобили</div>
+        </div>
+        <div class="sort">
+          <label class="muted" style="font-size:13px;margin-right:6px">Сортировать:</label>
+          <select id="sortBy">
+            <option value="recent">Свежее</option>
+            <option value="price-asc">Цена ↑</option>
+            <option value="price-desc">Цена ↓</option>
+          </select>
+        </div>
+      </div>
+      <div id="grid" class="grid"></div>
+      <div id="empty" class="empty" style="display:none;margin-top:12px">Объявления не найдены — попробуйте изменить фильтры</div>
+    </div>
+  </section>
+</main>
 
 <script>
-let ADS = {{ ads|tojson|safe }};
-
-function renderAds(list){
-  const container = document.getElementById('adsContainer');
-  container.innerHTML = '';
-  if(!list.length){
-    container.innerHTML = '<p>Объявления не найдены</p>';
-    return;
-  }
-  list.forEach(ad=>{
-    const div=document.createElement('div');
-    div.className='ad';
-    div.innerHTML=`<strong>${ad.title}</strong><br>${ad.price} ${ad.currency}<br>${ad.user} | ${ad.date} | ${ad.condition==='new'?'Новое':'С пробегом'}`;
-    container.appendChild(div);
-  });
-}
-
-function applyFilters(){
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const cond = document.getElementById('filterCondition').value;
-  const min = Number(document.getElementById('priceMin').value) || 0;
-  const max = Number(document.getElementById('priceMax').value) || Infinity;
-
-  const filtered = ADS.filter(ad=>{
-    const text = (ad.title+' '+ad.user).toLowerCase();
-    const priceNum = Number(ad.price.replace(/\s/g,''));
-    let ok = text.includes(q) && priceNum>=min && priceNum<=max;
-    if(cond) ok = ok && ad.condition===cond;
-    return ok;
-  });
-  renderAds(filtered);
-}
-
-renderAds(ADS);
-</script>
-</body>
-</html>
+// ADS dataset, фильтры и рендеринг (тот же, что и у тебя)
+const ADS = [
+  {id:1, brand:"Toyota", model:"Camry", price:1250000, currency:"сом", color:"Белый", condition:"used", body:"Сед
